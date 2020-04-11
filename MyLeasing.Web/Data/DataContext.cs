@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyLeasing.Web.Data.Entity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyLeasing.Web.Data
 {
-    public class DataContext:DbContext
+    public class DataContext: IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -21,6 +22,7 @@ namespace MyLeasing.Web.Data
         public DbSet<Property>Properties { get; set; }  //se crea la tabla owners a partir del objeto owner  
         public DbSet<PropertyImage> PropertyImages { get; set; }  //se crea la tabla owners a partir del objeto owner  
         public DbSet<PropertyType> PropertyTypes { get; set; }  //se crea la tabla owners a partir del objeto owner  
+        public DbSet<Manager> Managers { get; set; }  //se crea la tabla owners a partir del objeto owner  
 
     }
 }
