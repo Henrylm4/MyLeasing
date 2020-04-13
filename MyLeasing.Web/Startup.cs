@@ -53,6 +53,10 @@ namespace MyLeasing.Web
             services.AddTransient<SeedDb>();//transient solo lo hace una vez
             services.AddScoped<IUserHelper, UserHelper>();//Scope lo inyecta cada vez que lo necesita 
             //.singleton lo ejecuta y lo deja en la memoria.
+            services.AddScoped<ICombosHelper, ComboHelper>();
+            services.AddScoped<IConverterHelper, ConverterHelper>();
+            services.AddScoped<IImageHelper, ImageHelper>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

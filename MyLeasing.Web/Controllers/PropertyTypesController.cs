@@ -27,7 +27,7 @@ namespace MyLeasing.Web.Controllers
 
         // GET: PropertyTypes/Details/5
         public async Task<IActionResult> Details(int? id)
-        {
+        {//para llenar los datos en la encuesta
             if (id == null)
             {
                 return NotFound();
