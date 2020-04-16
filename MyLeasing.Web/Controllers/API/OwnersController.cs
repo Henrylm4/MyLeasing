@@ -7,11 +7,15 @@ using MyLeasing.Common.Models;
 using MyLeasing.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using MyLeasing.Web.Data.Entity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MyLeasing.Web.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]//autorizar el uso del controlador con el token
+
     public class OwnersController : ControllerBase
     {
         private readonly DataContext _dataContext; //Data Context para poder obtener valores de la base de datos
