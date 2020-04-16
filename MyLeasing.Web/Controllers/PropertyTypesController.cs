@@ -124,14 +124,21 @@ namespace MyLeasing.Web.Controllers
                 return NotFound();
             }
 
-            var propertyType = await _context.PropertyTypes
+            var propertyType = await _context.PropertyTypes.Include(pt=>pt.Properties)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (propertyType == null)
             {
                 return NotFound();
             }
+            if( propertyType.Properties.Count > 0)
+            {
+                return RedirectToAction(nameof(Index));
 
-            return View(propertyType);
+            }
+            _context.PropertyTypes.Remove(propertyType);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: PropertyTypes/Delete/5
