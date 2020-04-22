@@ -11,6 +11,7 @@ namespace MyLeasing.Prism.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private string _password;
         private bool _isRunning;
@@ -20,6 +21,7 @@ namespace MyLeasing.Prism.ViewModels
         {
             Title = "Login";
             _isEnabled = true;//por defecto los bool arrancan en face, hay que iniciarlo verdadero 
+            _navigationService = navigationService;
             _apiService = apiService;
         }
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login)); //Cuando hagan clic en el boton Login, ejecuta en metodo Login
@@ -84,9 +86,14 @@ namespace MyLeasing.Prism.ViewModels
             }
 
             var token = response.Result;//Response es un objeto donde el .result devuelve  el token
-
-            IsRunning = false;
+            var response2 = await _apiService.GetOwnerByEmail(
+                url, "api", "/Owners/GetOwnerByEmail", "bearer", token.Token, Email);
+            var owner = response2.Result;//no hay necesidad de hacer cast porque ya se hizo en el apiService
+            var parameters = new NavigationParameters();
+            parameters.Add("owner",owner);//es como el bundle de Android, permite enviar objetos a otra pag
+            await _navigationService.NavigateAsync("PropertiesPage", parameters);//nos lleva a la pagina de propiedades con los parametros incluidos
             IsEnabled = true;
+            IsRunning = false;
         }
     }
 }

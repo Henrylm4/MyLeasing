@@ -9,7 +9,7 @@
         <ResourceDictionary>
 
             <!-- Biblioteca de recursos para usar valores como el url que es un valor que se usa seguido -->
-            <x:String x:Key="UrlAPI">https://myleasing.azurewebsites.net/</x:String>
+            <x:String x:Key="UrlAPI">https://myleas.azurewebsites.net/</x:String>
 
         </ResourceDictionary>
 
