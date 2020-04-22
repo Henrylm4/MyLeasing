@@ -1,12 +1,20 @@
-﻿using MyLeasing.Common.Models;
+﻿
+using MyLeasing.Common.Models;
 using System.Threading.Tasks;
 
 namespace MyLeasing.Common.Services
 {
     public interface IApiService
     {
-        Task<Response> GetOwnerByEmail(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, string email);
-        Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
-        Task GetTokenAsync(string url, string v1, string v2, object request);
+        Task<Response<OwnerResponse>> GetOwnerByEmail(string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            string email);
+        //El metodo de abajo por como esta disenada la clase Response permite directamente devolver un TokenResponse cuando se usa el .Result
+        Task<Response<TokenResponse>> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
+        Task<bool> CheckConnection(string url);
+
     }
 }

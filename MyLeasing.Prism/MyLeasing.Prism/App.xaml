@@ -5,11 +5,11 @@
              x:Class="MyLeasing.Prism.App">
 	<Application.Resources>
 
-		<!-- Diccionario de recursos, valores reusados a lo largo de toda la documentacion -->
+		<!-- Application resource dictionary -->
         <ResourceDictionary>
 
-            <!-- Parameters  Ejemplo, el url de nuestro sitio-->
-            <x:String x:Key="UrlAPI">https://myleas.azurewebsites.net/</x:String>
+            <!-- Biblioteca de recursos para usar valores como el url que es un valor que se usa seguido -->
+            <x:String x:Key="UrlAPI">https://myleasing.azurewebsites.net/</x:String>
 
         </ResourceDictionary>
 
