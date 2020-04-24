@@ -4,6 +4,59 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyLeasing.Prism.Views.PropertiesPage"
-             Title="{Binding Title}">
-  
+             BackgroundColor="Silver"
+         	 Title="{Binding Title}">
+
+
+    <StackLayout
+        Padding="10">
+        <ListView 
+            HasUnevenRows="true" 
+            ItemsSource="{Binding Properties}"
+            SeparatorVisibility="None"
+        	IsRefreshing="{Binding IsRefreshing}">
+            <!--filas de diferentes tamanos es HasUnevenRows, ;los tres elementos siguientes son para la list view obligatorios-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--LA primera columna es para la imagen por eso que la anchura dependa de la imagen-->
+                                <ColumnDefinition Width="Auto"/>
+                                <!--La segunda usa * que usa el tamano que sobre-->
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding FirstImage}" WidthRequest="100"/>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Text="Neighborhood" FontAttributes="Bold"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Neighborhood}"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="Address" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Address}"/>
+                                <Label Grid.Row="2" Grid.Column="0" Text="Price" FontAttributes="Bold"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Price}"/>
+                                <Label Grid.Row="3" Grid.Column="0" Text="Type" FontAttributes="Bold"/>
+                                <Label Grid.Row="4" Grid.Column="0" Text="Is Available?" FontAttributes="Bold"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding PropertyType}"/>
+                                <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding IsAvailable}" IsEnabled="False"/>
+                                
+                            </Grid>
+                        </Grid>   
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        
+    </StackLayout>
 </ContentPage>
