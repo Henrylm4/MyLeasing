@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
            	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"                      
              x:Class="MyLeasing.Prism.Views.PropertiesPage"
-         	 Title="{Binding Title}">
+         	 BackgroundColor="Silver"
+             Title="{Binding Title}">
 
 
     <StackLayout
@@ -19,17 +20,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <!--LA primera columna es para la imagen por eso que la anchura dependa de la imagen-->
-                                <ColumnDefinition Width="Auto"/>
-                                <!--La segunda usa * que usa el tamano que sobre-->
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <!--<Image Grid.Column="0" Source="{Binding FirstImage}" WidthRequest="100"/>-->
-                            <!--Esta es la forma para insertar imagenes para que no se bugueen en androrid--> 
-                            <ffimageloading:CachedImage
-	                            Grid.Column="0"
+                        <!--Frame es para mantener separado cada property con su cornerradius para que no sea rectangulo-->
+
+                        <Frame CornerRadius="10" Margin="0,0,0,5">
+                            <StackLayout>
+                                <ffimageloading:CachedImage
 	                            Source="{Binding FirstImage}"
 	                            LoadingPlaceholder= "LoaderImage"
 	                            ErrorPlaceholder= "ErrorImage"
@@ -37,9 +32,21 @@
 	                            RetryCount= "3"
 	                            RetryDelay= "600"
 	                            DownsampleToViewSize = "true"
-	                            WidthRequest="100"/>
+	                            WidthRequest="200"/>
 
-                            <Grid Grid.Column="1">
+                                <Grid>
+                            <Grid.ColumnDefinitions>
+                                <!--LA primera columna es para la imagen por eso que la anchura dependa de la imagen--><!--
+                                <ColumnDefinition Width="Auto"/>-->
+                                <!--La segunda usa * que usa el tamano que sobre-->
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+
+                            </Grid.ColumnDefinitions>
+                            <!--<Image Grid.Column="0" Source="{Binding FirstImage}" WidthRequest="100"/>-->
+                            <!--Esta es la forma para insertar imagenes para que no se bugueen en androrid--> 
+                            
+                            <Grid Grid.Column="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
@@ -60,11 +67,16 @@
                                 <Label Grid.Row="3" Grid.Column="0" Text="Type" FontAttributes="Bold"/>
                                 <Label Grid.Row="4" Grid.Column="0" Text="Is Available?" VerticalOptions="Center" FontAttributes="Bold"/>
                                 <Label Grid.Row="3" Grid.Column="1" Text="{Binding PropertyType}"/>
-                                <Switch Grid.Row="4" Grid.Column="1" HorizontalOptions="Start" IsToggled="{Binding IsAvailable}" IsEnabled="False"/>
+                                <CheckBox Grid.Row="4" Grid.Column="1" HorizontalOptions="Start" IsChecked="{Binding IsAvailable}" IsEnabled="False"/>
                                 
                             </Grid>
-                        </Grid>   
+                            <Image Grid.Column="1" Source="ic_more_vert"/>
+                        </Grid>
+                            </StackLayout>
+                        </Frame>
+                            
                     </ViewCell>
+                        
                 </DataTemplate>
             </ListView.ItemTemplate>
 
